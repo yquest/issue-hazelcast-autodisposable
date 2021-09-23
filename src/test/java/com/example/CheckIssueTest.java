@@ -5,19 +5,19 @@ import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.scheduledexecutor.IScheduledExecutorService;
 import com.hazelcast.scheduledexecutor.TaskUtils;
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.concurrent.TimeUnit;
 
-public class CheckIssue {
+public class CheckIssueTest {
 
     public static final String RUNNABLES = "runnables";
     public static final String CALLABLES = "callables";
     public static HazelcastInstance hazelcast;
+
     @BeforeClass
-    public static void setup(){
+    public static void setup() {
         Config config = new Config();
         config.getScheduledExecutorConfig(RUNNABLES).setCapacity(2);
         config.getScheduledExecutorConfig(CALLABLES).setCapacity(2);
@@ -33,6 +33,7 @@ public class CheckIssue {
             Thread.sleep(1000);
         }
     }
+
     @Test
     public void checkAutoDisposableCallable() throws InterruptedException {
         IScheduledExecutorService callables = hazelcast.getScheduledExecutorService(CALLABLES);
